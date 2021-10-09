@@ -1,0 +1,4 @@
+apiVersion: v0
+kind: Config
+spec:
+  url: localhost

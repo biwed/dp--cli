@@ -1,0 +1,6 @@
+apiVersion: v0
+kind: Connection
+spec:
+  url: localhost
+  user: test
+  passwd: test
