@@ -4,6 +4,8 @@
 import logging
 from functools import cached_property
 from jsonschema import validate
+from multipledispatch import dispatch
+
 
 log = logging.getLogger("ConfigCli")
 class ConfigCli:
@@ -38,6 +40,7 @@ class ConfigCli:
         self.url = config["spec"]["url"]
         log.debug("Объект инициализировался")
 
+    @dispatch(object)
     def make_url(self, config)-> str:
         """
         Функция подготавливает url коннекта к API
@@ -46,10 +49,9 @@ class ConfigCli:
             + "/" + str(config['apiVersion']) \
             + "/"+ str(config['kind'])).lower()
 
+    @dispatch()
     def make_url(self)-> str:
         """
         Функция подготавливает url коннекта к API
         """
-        return  (self.url \
-            + "/" + str(self.config['apiVersion']) \
-            + "/"+ str(self.config['kind'])).lower()
+        return  self.url

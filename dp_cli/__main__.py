@@ -5,7 +5,7 @@
 import logging
 import click
 import yaml
-from cli.ConfigCli import ConfigCli
+from dp_cli.ConfigCli import ConfigCli
 #import requests
 
 
@@ -57,6 +57,9 @@ def main(config, file, action):
     log.debug("Инициализирую конфиг")
     program_config = ConfigCli(program_config_yaml)
     url = program_config.make_url()
+    log.debug(f"Url = {url}")
+    object_config = load_yaml(file)
+    url = program_config.make_url(object_config)
     log.debug(f"Url = {url}")
     log.debug("Программа завершина")
 
